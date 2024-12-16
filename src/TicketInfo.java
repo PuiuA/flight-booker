@@ -6,6 +6,8 @@ public class TicketInfo {
     private String seatNumber;
     private String classType;
     private String status;
+    Client client;
+    Zbor zbor;
 
     static String[] classTypes = {"Economy", "Business", "First"};
     static String[] statusEx = {"Confirmed", "Cancelled", "Checked-in"};
