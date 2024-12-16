@@ -1,7 +1,21 @@
+
+@Entity
+@Table(name="airport")
 public class Airport {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    public int id;
+
+    @Column(name="name", nullable=false)
     public String name;
+
+    @Column(name="city", nullable=false)
     public String city;
+
+    @Column(name="country", nullable=false)
     public String country;
+
+    public Airport() {}
 
     public Airport(String name, String city, String country) {
         this.name = name;

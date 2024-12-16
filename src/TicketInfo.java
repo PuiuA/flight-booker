@@ -1,12 +1,29 @@
 import java.util.Arrays;
 import java.util.Random;
-
+@Entity
+@Table(name="ticket")
 public class TicketInfo {
-    private String ticketId;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int ticketId;
+
+    @Column(name="seat_number")
     private String seatNumber;
+
+    @ManyToOne
+    @JoinColumn(name="class_type")
     private String classType;
+
+    @ManyToOne
+    @JoinColumn(name="status")
     private String status;
+
+    @OneToOne
+    @JoinColumn(name="client_id")
     Client client;
+
+    @ManyToOne
+    @JoinColumn(name="zbor_id")
     Zbor zbor;
 
     static String[] classTypes = {"Economy", "Business", "First"};
