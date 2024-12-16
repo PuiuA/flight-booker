@@ -1,3 +1,5 @@
+import jakarta.persistence.*;
+
 import java.util.Arrays;
 import java.util.Random;
 @Entity
@@ -10,12 +12,10 @@ public class TicketInfo {
     @Column(name="seat_number")
     private String seatNumber;
 
-    @ManyToOne
-    @JoinColumn(name="class_type")
+    @Column(name = "class_type")
     private String classType;
 
-    @ManyToOne
-    @JoinColumn(name="status")
+    @Column(name = "status")
     private String status;
 
     @OneToOne
@@ -31,20 +31,20 @@ public class TicketInfo {
 
     public TicketInfo() {
         Random random = new Random();
-        this.ticketId = "TKT" + (1000 + random.nextInt(9000));
+        this.ticketId = Integer.parseInt("TKT" + (1000 + random.nextInt(9000)));
         this.seatNumber = (1 + random.nextInt(50)) + "" + (char) ('A' + random.nextInt(6));
         this.classType = classTypes[random.nextInt(classTypes.length)];
         this.status = statusEx[random.nextInt(statusEx.length)];
     }
 
-    public TicketInfo(String ticketId, String seatNumber, String classType, String status) {
+    public TicketInfo(int ticketId, String seatNumber, String classType, String status) {
         setTicketId(ticketId);
         setSeatNumber(seatNumber);
         setClassType(classType);
         setStatus(status);
     }
 
-    public String getTicketId() {
+    public int getTicketId() {
         return ticketId;
     }
 
@@ -60,8 +60,8 @@ public class TicketInfo {
         return status;
     }
 
-    public void setTicketId(String ticketId) {
-        if (ticketId != null && ticketId.matches("TKT\\d{4}")) {
+    public void setTicketId(int ticketId) {
+        if (ticketId != 0) {
             this.ticketId = ticketId;
         } else {
             throw new IllegalArgumentException("Invalid ticket ID. Must start with 'TKT' followed by 4 digits.");
